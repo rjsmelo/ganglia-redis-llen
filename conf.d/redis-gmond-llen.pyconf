@@ -1,0 +1,17 @@
+modules {
+  module {
+    name = "redis-gmond-llen"
+    language = "python"
+    param host { value = "127.0.0.1" }
+    param port { value = 6379 }
+    param databases { value = "1, 2" }
+    param lists { value = "queue_inbound, queue_store, queue_aggregate" }
+  }
+}
+
+collection_group {
+  collect_every = 10
+  time_threshold = 60
+  metric { name_match = "redis-llen(.+)" }
+}
+
